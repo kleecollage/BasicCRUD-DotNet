@@ -1,0 +1,25 @@
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model CrudNET8MVC.Models.Contacto
+@{
+    ViewData["Title"] = "Detalle del Contacto";
+}
+
+<h1 class="text-center">Contacto con .NET 8 (.NET Core MVC)</h1>
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><string>Detalle del Usuario</string></h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Nombre: </strong>@Html.DisplayFor(m => m.Nombre)</li>
+                    <li class="list-group-item"><strong>Telefono: </strong>@Html.DisplayFor(m => m.Telefono)</li>
+                    <li class="list-group-item"><strong>Celular: </strong>@Html.DisplayFor(m => m.Celular)</li>
+                    <li class="list-group-item"><strong>Email: </strong>@Html.DisplayFor(m => m.Email)</li>
+                </ul>
+                <a asp-controller="Inicio" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

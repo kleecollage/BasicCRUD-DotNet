@@ -1,0 +1,99 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model IEnumerable<CrudNET8MVC.Models.Contacto>
+@{
+    ViewData["Title"] = "Lista de contactos";
+}
+
+<h1 class="text-center">Contacto con .NET 8 (.NET Core MVC)</h1>
+<div class="row">
+    <div class="offset-9 col-3 mb-3">
+        <a asp-action="Crear" asp-controller="Inicio" class="btn btn-secondary d-block mx-auto btn-lg">
+            <i class="bi bi-file-plus-fill"></i> Nuevo Usuario
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><string>Lista de Usuarios</string></h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model.Count() > 0)
+                    {
+                        <table class="table table-bordered" id="tblUsuarios" style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(m => m.Id)</th>
+                                <th>@Html.DisplayNameFor(m => m.Nombre)</th>
+                                <th>@Html.DisplayNameFor(m => m.Telefono)</th>
+                                <th>@Html.DisplayNameFor(m => m.Celular)</th>
+                                <th>@Html.DisplayNameFor(m => m.Email)</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.Id)</td>
+                                    <td>@Html.DisplayFor(m => item.Nombre)</td>
+                                    <td>@Html.DisplayFor(m => item.Telefono)</td>
+                                    <td>@Html.DisplayFor(m => item.Celular)</td>
+                                    <td>@Html.DisplayFor(m => item.Email)</td>
+                                    <td>
+                                        <a class="btn btn-warning" asp-action="Editar" asp-route-id="@item.Id">
+                                            <i class="bi bi-pencil-fill"></i>Editar
+                                        </a>
+                                        <a class="btn btn-secondary" asp-action="Detalle" asp-route-id="@item.Id">
+                                            <i class="bi bi-info-circle-fill"></i>Detalle
+                                        </a>
+                                        <a class="btn btn-danger" asp-action="Borrar" asp-route-id="@item.Id">
+                                            <i class="bi bi-eraser-fill"></i>Borrar
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No hay registro</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //Llamar a datatable
+            $('#tblUsuarios').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });        
+    </script>
+}
