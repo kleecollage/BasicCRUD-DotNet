@@ -1,0 +1,4 @@
+Scaffold-DbContext "AQUICONEXIONBASEDEDATOS" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -ContextDir Datos -Context ApplicationDbContext -Force
+
+// RIDER
+dotnet ef dbcontext scaffold --project DbFirst/DbFirst.csproj --startup-project DbFirst/DbFirst.csproj --configuration Debug "Server=localhost,1433;Database=BlogCoreBdNet8;User ID=klee;Password=...;Encrypt=false;TrustServerCertificate=True;MultipleActiveResultSets=true" Microsoft.EntityFrameworkCore.SqlServer --context ApplicationDbContext --context-dir Datos --force --output-dir Models 

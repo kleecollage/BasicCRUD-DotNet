@@ -1,0 +1,19 @@
+"ConnectionStrings": {
+  "ConexionSQL": "Server=AQUISERVIDOR;Database=AQUIBASEDEDATOS;User ID=AQUIUSUARIO;Password=AQUIPASSWORD;Trusted_Connection=true;Encrypt=false;MultipleActiveResultSets=true"
+},
+
+// RIDER
+"ConnectionStrings": {
+    "ConnectionSql": "Server=localhost,1433;Database=BlogCoreBdNet8;User ID=klee;Password=...;Encrypt=false;TrustServerCertificate=True;MultipleActiveResultSets=true"
+},
+
+// on Program.cs...
+var connectionString = builder.Configuration.GetConnectionString("ConnectionSql") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+	// if whant Identity implementation...
+	builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+	{
+	options.Tokens.ProviderMap.Add("Default", new TokenProviderDescriptor(typeof(DataProtectorTokenProvider<ApplicationUser>)));
+	}
