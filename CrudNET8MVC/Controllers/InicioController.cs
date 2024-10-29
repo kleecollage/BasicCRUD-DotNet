@@ -2,6 +2,7 @@ using System.Diagnostics;
 using CrudNET8MVC.Data;
 using Microsoft.AspNetCore.Mvc;
 using CrudNET8MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrudNET8MVC.Controllers;
@@ -21,12 +22,14 @@ public class InicioController : Controller
         return View(await _contexto.Contacto.ToListAsync());
     }
     
+    [Authorize]
     [HttpGet]
     public IActionResult Crear()
     {
         return View();
     }
     
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Crear(Contacto contacto)
@@ -37,6 +40,7 @@ public class InicioController : Controller
         return RedirectToAction(nameof(Index));
     }
     
+    [Authorize]
     [HttpGet]
     public IActionResult Editar(int? id)
     {
@@ -48,6 +52,7 @@ public class InicioController : Controller
         return View(contacto);
     }
     
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Editar(Contacto contacto)
@@ -73,6 +78,7 @@ public class InicioController : Controller
         return View();
     }
 
+    [Authorize]
     [HttpGet]
     public IActionResult Borrar(int? id)
     {
