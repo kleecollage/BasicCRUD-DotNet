@@ -67,3 +67,6 @@ _ReSharper*/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+
+# Connection Secrets
+CrudNET8MVC/appsettings.json

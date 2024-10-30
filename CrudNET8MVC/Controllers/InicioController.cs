@@ -2,8 +2,10 @@ using System.Diagnostics;
 using CrudNET8MVC.Data;
 using Microsoft.AspNetCore.Mvc;
 using CrudNET8MVC.Models;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 
 namespace CrudNET8MVC.Controllers;
 
@@ -37,6 +39,25 @@ public class InicioController : Controller
         if (!ModelState.IsValid) return View();
         _contexto.Contacto.Add(contacto);
         await _contexto.SaveChangesAsync();
+        
+        // Para envio de correo
+        var mensaje = new MimeMessage();
+        mensaje.From.Add(new MailboxAddress("Test envio email", "antonio.hs6991@gmail.com"));
+        mensaje.To.Add(new MailboxAddress("Test enviado", "klee.collage@gmail.com"));
+        mensaje.Subject = "Test email asp.net core";
+        mensaje.Body = new TextPart("plain")
+        {
+            Text = "Hola saludos desde asp.net core"
+        };
+        using (var cliente = new SmtpClient())
+        {
+            cliente.Connect("smtp.gmail.com", 587); // para gmail el puerto puede ser 465 o 587
+            cliente.Authenticate("antonio.hs6991@gmail.com", "qsfl xzsj zihm lqmp");
+            cliente.Send(mensaje);
+            cliente.Disconnect(true);
+        }
+        
+        
         return RedirectToAction(nameof(Index));
     }
     
